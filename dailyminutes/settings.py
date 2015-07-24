@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_inbound_email',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -81,3 +82,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_HOST_USER = "dailyminutes"
+EMAIL_HOST_PASSWORD = "thisissparta1"
+EMAIL_PORT =587
+EMAIL_USE_TLS = True
+BOUNCEBACK_ENABLED = True
+
+INBOUND_EMAIL_PARSER = 'django_inbound_email.backends.sendgrid.SendGridRequestParser'
+INBOUND_EMAIL_LOG_REQUESTS = True
+
+INBOUND_EMAIL_ATTACHMENT_SIZE_MAX = int(environ.get('INBOUND_EMAIL_ATTACHMENT_SIZE_MAX', 10000000))
