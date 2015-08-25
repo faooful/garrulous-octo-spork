@@ -1,2 +1,4 @@
 Django==1.7
 django-inbound-email==0.8.4
+django-post-office==2.0.1
+jsonfield==1.0.3

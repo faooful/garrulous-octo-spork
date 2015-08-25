@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+from os import environ
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_inbound_email',
+    'post_office'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -83,14 +85,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-EMAIL_HOST = "smtp.sendgrid.net"
-EMAIL_HOST_USER = "dailyminutes"
+EMAIL_HOST = "localhost"
+EMAIL_PORT = 25
+EMAIL_BACKEND = 'post_office.EmailBackend'
+
+"""EMAIL_HOST_USER = "dailyminutes"
 EMAIL_HOST_PASSWORD = "thisissparta1"
-EMAIL_PORT =587
+
 EMAIL_USE_TLS = True
 BOUNCEBACK_ENABLED = True
 
 INBOUND_EMAIL_PARSER = 'django_inbound_email.backends.sendgrid.SendGridRequestParser'
-INBOUND_EMAIL_LOG_REQUESTS = True
+INBOUND_EMAIL_LOG_REQUESTS = True"""
+
 
 INBOUND_EMAIL_ATTACHMENT_SIZE_MAX = int(environ.get('INBOUND_EMAIL_ATTACHMENT_SIZE_MAX', 10000000))
